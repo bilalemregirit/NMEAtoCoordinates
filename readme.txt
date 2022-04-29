@@ -9,6 +9,8 @@ this values to the Google Maps you can find your location presicely
  (i mean it only works with positive sign latidude and longitude values)
  
  (and sorry for turkish variable names, you can change them as you wish)
+ 
+ (main.py1.0 update : There was a problem with the serial reading with Raspi, i changed serial read part with try except)
 
 Necessary Libraries and Extensions:
 1- Serial library for python

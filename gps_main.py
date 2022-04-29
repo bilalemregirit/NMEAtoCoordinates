@@ -1,6 +1,7 @@
 import time
 import serial
 yeni_liste = []
+except_counter=0
 ser = serial.Serial(
         port='/dev/ttyAMA0',
         baudrate = 9600,
@@ -10,8 +11,17 @@ ser = serial.Serial(
         timeout=1
         )
 
+
 while True:
-    port_veri = ser.readline()
+    
+    try:
+        port_veri = ser.readline()
+    except serial.serialutil.SerialException:
+        except_counter+=1
+        if except_counter == 5:
+           print("Serial Port Tikandi!!!!!") 
+           break
+        time.sleep(1) 
     yeni_veri = port_veri.split(", ")
     for x in yeni_veri:    
         
@@ -30,9 +40,9 @@ while True:
             lng_degree = lng[:3]
             lng_aftz = float(lng[3:10])
             lng_naftz = float(lng_aftz) / 60
-            new_lng =  float(lng_degree) +lng_naftz
+            new_lng =  float(lng_degree) +lng_naftz            
+            print(new_lat,new_lng)
+            print(InorOut(bizim_ev_alani,new_lat,new_lng))
             
-            print(new_lng,new_lat)
-    time.sleep(0.1)
-    
+    #time.sleep(0.1)
     
